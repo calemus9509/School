@@ -1,0 +1,10 @@
+<form [formGroup]="frmEspecialidad">
+  <label for="">especialidad</label>
+  <input
+    type="text"
+    placeholder="Ingrese la especialidad"
+    formControlName="nombre"
+  />
+
+  <button (click)="guardar()">Guardar</button>
+</form>
