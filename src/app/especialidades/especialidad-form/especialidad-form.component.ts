@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EspecialidadService } from '../especialidad.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-especialidad-form',
@@ -13,7 +14,8 @@ export class EspecialidadFormComponent implements OnInit {
   public frmEspecialidad: FormGroup
   public id =0
   
-  constructor(private service: EspecialidadService, private activedRoute: ActivatedRoute){
+  constructor(private service: EspecialidadService, private activedRoute: ActivatedRoute, private toast: ToastrService){
+    
     this.id = this.activedRoute.snapshot.params['id']           
     this.frmEspecialidad = new FormGroup({
       nombre: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(150)])
@@ -34,7 +36,7 @@ export class EspecialidadFormComponent implements OnInit {
   
   guardar(){
     if(this.frmEspecialidad.invalid){
-      alert("Debe llenar todos los campos")
+      this.toast.warning("Debe llenar todos los campos!")
       return
     }
     let data ={
@@ -42,7 +44,7 @@ export class EspecialidadFormComponent implements OnInit {
     }
     this.service.guardar(data,this.id).subscribe(
       result=>{
-        alert("Especialidad Guardada")
+        this.toast.success("Especialidad Guardada")
       }
     )
   }

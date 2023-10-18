@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { EspecialidadIndexComponent } from './especialidades/especialidad-index/especialidad-index.component';
 import { EspecialidadFormComponent } from './especialidades/especialidad-form/especialidad-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule ,
     FormsModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
+     BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

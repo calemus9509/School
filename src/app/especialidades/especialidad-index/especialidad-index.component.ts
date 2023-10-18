@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EspecialidadService } from '../especialidad.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-especialidad-index',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class EspecialidadIndexComponent implements OnInit {
   public listEspecialidades: any
 
-  constructor(private service: EspecialidadService, private router: Router){}
+  constructor(private service: EspecialidadService, private router: Router, private toast: ToastrService){}
  
   ngOnInit(): void{
     
@@ -42,7 +43,7 @@ export class EspecialidadIndexComponent implements OnInit {
   delete(id: any){
     this.service.delete(id).subscribe(
       result=>{
-        alert("Se ha eliminado el registro ")
+        this.toast.success("Registro Eliminado")
         this.obtenerEspecialidades()
       }
     )
