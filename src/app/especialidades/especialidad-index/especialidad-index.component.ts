@@ -33,6 +33,14 @@ export class EspecialidadIndexComponent implements OnInit {
     this.dtTrigger.next(void 0)
   }
 
+  refreshTable(){
+    if(typeof this.dtElement!.dtInstance != 'undefined'){
+      this.dtElement!.dtInstance.then((dtInstance: DataTables.Api)=>{
+        dtInstance.ajax.reload()
+      })
+    }
+  }
+
   loadTable() {
     const that = this;
     this.optionsDatatable = {
@@ -71,17 +79,30 @@ export class EspecialidadIndexComponent implements OnInit {
       // language: LANGUAGE_DATATABLE,
       columns: [
         {
+          title: 'ID',
+          data: 'id'
+        },
+        {
           title: 'Nombre',
           data: 'nombre'
         },
+        {
+          title: 'Acciones',
+          data: 'id',
+          render: function(idRegistro){
+            return `<button data-id="${idRegistro}" class="btn btn-outline-warning btn-modificar">Modificar</button>
+            <button data-id="${idRegistro}" class="btn btn-outline-danger mx-2 btn-eliminar">Eliminar</button>`
+          }
+        },
       ],
-  //     drawCallback: (settings: any) => {
-  //       $('.btn-dropdown-eliminar').off().on('click', (event) => {
-  //         this.openConfirmationModal(event.target.dataset['id']);
-  //       });
-  //       $('.btn-dropdown-modificar').off().on('click', (event) => {
-  //         this.eventEdit.emit(event.target.dataset['id'])
-  //       });
+      drawCallback: (settings: any) => {
+        $('.btn-eliminar').off().on('click', (event) => {
+          this.delete(event.target.dataset['id']);
+        });
+        $('.btn-modificar').off().on('click', (event) => {
+          this.edit(event.target.dataset['id'])
+        });
+      }
   //       $('.btn-dropdown-descargar').off().on('click', (event) => {
   //         this.eventDownload.emit(event.target.dataset['id'])
   //       });
@@ -120,9 +141,11 @@ export class EspecialidadIndexComponent implements OnInit {
     this.service.delete(id).subscribe(
       result=>{
         this.toast.success("Registro Eliminado")
-        this.obtenerEspecialidades()
+        this.refreshTable()
       }
     )
   }
 
 }
+
+
