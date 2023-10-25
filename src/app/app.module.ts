@@ -11,6 +11,7 @@ import { EspecialidadFormComponent } from './especialidades/especialidad-form/es
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     ToastrModule.forRoot(),
      BrowserAnimationsModule,
+     DataTablesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

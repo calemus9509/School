@@ -1,5 +1,11 @@
-<button class="btn btn-outline-primary mt-3" (click)="new()">Nuevo</button>
-<table class="table table-striped mt-3">
+<button class="btn btn-outline-primary my-4 " (click)="new()">Nuevo</button>
+
+<table datatable [dtOptions]="optionsDatatable" [dtTrigger]="dtTrigger"
+  class="display compact responsive w-100 table table-striped table-bordered">
+
+</table>
+
+<!-- <table class="table table-striped mt-3">
   <thead>
     <tr>
       <th>Id</th>
@@ -17,4 +23,4 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table>  -->
