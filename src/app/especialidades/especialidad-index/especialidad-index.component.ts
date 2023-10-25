@@ -53,8 +53,8 @@ export class EspecialidadIndexComponent implements OnInit {
 
         this.service.obtenerDatatable(this._datatableParameter).subscribe(res => {
           callback({
-            recordsTotal: res.data.totalElements,
-            recordsFiltered: res.data.numberOfElements,
+            recordsTotal: res.data.numberOfElements,
+            recordsFiltered: res.data.totalElements,
             draw: parameters.draw,
             data: res.data.content
           });
